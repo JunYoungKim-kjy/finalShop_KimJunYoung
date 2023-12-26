@@ -1,0 +1,10 @@
+/_mall/
+/controller/
+/dao/
+/dto/
+/files/
+/menu_admin/
+/menu_mall/
+/menu_member/
+/module-info.class
+/util/
