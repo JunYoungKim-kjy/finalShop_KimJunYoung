@@ -106,7 +106,7 @@ static private BoardDAO instance = new BoardDAO();
 			return;
 		}
 		if(!id.equals("admin")&&!delBoard.getId().equals(id)) {
-			System.out.println("권한이 없습니다.");
+			System.out.println("본인 게시글만 삭제할 수 있습니다.");
 			return;
 		}
 		bList.remove(delBoard);

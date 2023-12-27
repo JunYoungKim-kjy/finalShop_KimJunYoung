@@ -16,6 +16,7 @@ public class _AdminMain implements MenuCommand {
 		fDAO = FileDAO.getInstance();
 		cDAO = CartDAO.getInstance();
 		iDAO = ItemDAO.getInstance();
+		bDAO = BoardDAO.getInstance();
 		
 	}
 

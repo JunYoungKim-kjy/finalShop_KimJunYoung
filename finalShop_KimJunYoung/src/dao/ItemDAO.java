@@ -177,6 +177,8 @@ public class ItemDAO {
 	}
 	public void printMemberBuied(List<Cart> cList) {
 		int num=1;
+		int totalSum=0;
+		int totalCnt=0;
 		for(Item i: iList) {
 			int cnt = 0;
 			int sum = 0;
@@ -188,6 +190,10 @@ public class ItemDAO {
 			if(cnt == 0 )continue;
 			sum += i.getPrice() * cnt;
 			System.out.printf("[%3d]\t%s(%d원) %d개 총 %d원 \n",num++,i.getItemName(),i.getPrice(),cnt,sum);
+			totalSum += sum;
+			totalCnt += cnt;
 		}
+		System.out.println("==============");
+		System.out.printf("총 %d개 ( %d원 )\n",totalCnt,totalSum);
 	}
 }

@@ -89,6 +89,7 @@ public class FileDAO {
 		saveData(FileName.CART,cData);
 		saveData(FileName.ITEM,iData);
 		saveData(FileName.MEMBER,mData);
+		System.out.println("저장 완료");
 	}
 	private void saveData(FileName name,String data) {
 		try {

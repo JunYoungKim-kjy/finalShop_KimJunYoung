@@ -23,6 +23,9 @@ public class MemberCart implements MenuCommand {
 	@Override
 	public boolean update() {
 		cDAO.printListMemberBuied(con.getLoginId(),iDAO);
+		
+		
+		
 		con.setNext("MemberMain");
 		return false;
 	}

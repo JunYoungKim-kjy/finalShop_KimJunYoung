@@ -9,13 +9,22 @@ import util.Util;
 
 public class MemberDAO {
 	static private MemberDAO instance = new MemberDAO();
+	List<Member> mList = new ArrayList<>();
+	CartDAO cDAO = CartDAO.getInstance();
 	
 	static public MemberDAO getInstance () {
 		return instance;
 	}
 	
-	
-	List<Member> mList = new ArrayList<>();
+	public boolean quitMember(String id) {
+		System.out.println("회원탈퇴를 하시겠습니까?");
+		if(!Util.getValue("[회원탈퇴] 를 입력해주세요.").equals("회원탈퇴")) {
+			return false;
+		}
+		deleteMember(id);
+		return true;
+		
+	}
 	void loadData(String data) {
 		String[] list = data.split("\n");
 		for(String temp:list) {
@@ -58,6 +67,7 @@ public class MemberDAO {
 		Member m = getMemberById(id);
 		if(m == null)return false;
 		System.out.println(m);
+		cDAO.deleteListByMember(id);
 		mList.remove(m);
 		return true;
 		
