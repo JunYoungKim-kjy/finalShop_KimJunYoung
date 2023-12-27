@@ -11,7 +11,7 @@ public class Util {
 	public static Util instance = new Util();
 	
 	public static String getValue(String msg) {
-		System.out.println(msg);
+		System.out.printf("▶ %s\n",msg);
 		return sc.next();
 	}
 	public static int getValue(String msg,int start,int end) {

@@ -41,6 +41,9 @@ public class Member {
 	public String getData() {
 		return "%s/%s/%s/%s\n".formatted(  memberNum, id,  pw,  memberName);
 	}
+	public void setPw(String pw) {
+		this.pw = pw;
+	}
 	@Override
 	public String toString() {
 		return "[%s][%8s][%8s][%8s]".formatted(memberNum,id,pw,memberName);

@@ -14,10 +14,11 @@ public class Cart {
 		this.itemNum = Integer.parseInt(itemNum);
 		this.itemCnt = Integer.parseInt(itemCnt);
 	}
-	public Cart(String id,int itemNum) {
+	public Cart(String id,int itemNum,int cnt) {
 		this.cartNum = ++num;
 		this.id = id;
 		this.itemNum = itemNum;
+		this.itemCnt = cnt;
 	}
 	public static int getNum() {
 		return num;

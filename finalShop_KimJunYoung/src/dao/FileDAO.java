@@ -1,13 +1,26 @@
 package dao;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class FileDAO {
+	
+	private String txtPath = "src/files";
+	Charset charSet = StandardCharsets.UTF_8;
 	
 	enum FileName{
 		BOARD("board.txt"),MEMBER("member.txt"),ITEM("item.txt"),CART("cart.txt");
@@ -47,7 +60,7 @@ public class FileDAO {
 			}
 		
 	}
-	private String loadFileData(FileName name) {
+	private String loadFile(FileName name) {
 		String data = "";
 		try(FileReader fr = new FileReader(path + name.getName());
 			BufferedReader br = new BufferedReader(fr)){
@@ -84,5 +97,41 @@ public class FileDAO {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	private void saveDataFile(FileName name, String data) {
+		
+		Path path = Paths.get(txtPath , name.getName());
+		
+		try(FileOutputStream fos = new FileOutputStream(path.toString());
+				OutputStreamWriter ow = new OutputStreamWriter(fos, charSet);
+				BufferedWriter bw = new BufferedWriter(ow);){
+				bw.write(data);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	
+	private String loadFileData(FileName name) {
+		Path path = Paths.get(txtPath, name.getName());
+		StringBuilder data = new StringBuilder();
+		try ( FileInputStream fis = new FileInputStream(path.toString());
+				InputStreamReader isr = new InputStreamReader(fis,charSet);
+				BufferedReader br = new BufferedReader(isr)
+						){
+			String line;
+			while((line = br.readLine()) != null) {
+				data.append(line);
+				data.append("\n");
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return data.toString().substring(0,data.length()-1);
 	}
 }

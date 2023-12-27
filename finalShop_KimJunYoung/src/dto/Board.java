@@ -66,8 +66,9 @@ public class Board {
 	}
 	@Override
 	public String toString() {
-		return "[번호:%d] 제목 [            %s            ]\n작성자 : %s \t작성일 :%s \t조회수:%d\n===================================\n내용 : %s\n===================================\n".formatted(boardNum,title,id,date,hits,contents);
-	}
+		return "[%d][제목:%s   작성자:%s  날짜 : %s  조회수 %d]".formatted(boardNum,title,id,date,hits);
+		
+		}
 	
 	
 	

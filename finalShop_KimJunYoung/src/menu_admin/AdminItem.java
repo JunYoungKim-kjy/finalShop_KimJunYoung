@@ -11,6 +11,7 @@ public class AdminItem implements MenuCommand {
 	@Override
 	public void init() {
 		iDAO = ItemDAO.getInstance();
+		cDAO = CartDAO.getInstance();
 		con = MallController.getInstance();
 		System.out.println("================[ 관리자 쇼핑몰관리 ]=============");
 		System.out.println("카테고리 순으로 정렬 카테고리가 같으면 아이템 이름순으로 정렬");
@@ -31,14 +32,15 @@ public class AdminItem implements MenuCommand {
 		}else if(sel == 1) {
 			iDAO.addItem();
 		}else if(sel == 2) {
-			if(iDAO.deleteItem()) {
-				cDAO.deleteListByItem();
+			int itemNum=iDAO.getDeleteItemNum();
+			if(itemNum!=0) {
+				cDAO.deleteListByItem(itemNum);
 				System.out.println("아이템 삭제 완료");
 			}else {
-				System.out.println("아이템 삭제 실패");
+				System.out.println("뒤로가기");
 			}
 		}else if(sel == 3) {
-			
+			iDAO.printSellCnt(cDAO);
 		}
 		return false;
 	}

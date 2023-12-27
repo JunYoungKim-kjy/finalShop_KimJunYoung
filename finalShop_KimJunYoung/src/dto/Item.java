@@ -1,6 +1,6 @@
 package dto;
 
-public class Item {
+public class Item implements Comparable<Item>{
 	private static int num;
 	private int itemNum;
 	private String categoryName;
@@ -32,8 +32,29 @@ public class Item {
 	public int getPrice() {
 		return price;
 	}
+	public static void setNum(int num) {
+		Item.num = num;
+	}
 	public String getData() {
 		return "%s/%s/%s/%s\n".formatted( itemNum, categoryName,  itemName,  price);
+	}
+	
+	
+	@Override
+	public String toString() {
+		return "[%3d][%5s][%5s][%8s]".formatted(itemNum,categoryName,itemName,price);
+	}
+	@Override
+	public int compareTo(Item o) {
+		if(this.getCategoryName().compareTo(o.getCategoryName()) > 0)
+			return 1;
+		else if(this.getCategoryName().compareTo(o.getCategoryName()) < 0)
+			return -1;
+		else if(this.itemName.compareTo(o.itemName) > 0)
+			return 1;
+		else if(this.itemName.compareTo(o.itemName) < 0)
+			return -1;
+		else return 0;
 	}
 	
 	
