@@ -74,6 +74,7 @@ static private BoardDAO instance = new BoardDAO();
 	}
 	List<Board> bList = new ArrayList<Board>();
 	void loadData(String data) {
+		if(data == null)return;
 		String[] list = data.split("\n");
 		for(String temp:list) {
 			String[]info = temp.split("/");

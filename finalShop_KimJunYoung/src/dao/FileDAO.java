@@ -60,51 +60,51 @@ public class FileDAO {
 			}
 		
 	}
-	private String loadFile(FileName name) {
-		String data = "";
-		try(FileReader fr = new FileReader(path + name.getName());
-			BufferedReader br = new BufferedReader(fr)){
-			while(true) {
-				String str = br.readLine();
-				if(str==null) {
-					break;
-				}
-				data += str + "\n";
-			}
-		}catch (IOException e) {
-			e.printStackTrace();
-		}
-		if(data.isEmpty())return null;
-		
-		data = data.substring(0,data.length()-1);
-		return data;
-	}
+//	private String loadFile(FileName name) {
+//		String data = "";
+//		try(FileReader fr = new FileReader(path + name.getName());
+//			BufferedReader br = new BufferedReader(fr)){
+//			while(true) {
+//				String str = br.readLine();
+//				if(str==null) {
+//					break;
+//				}
+//				data += str + "\n";
+//			}
+//		}catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		if(data.isEmpty())return null;
+//		
+//		data = data.substring(0,data.length()-1);
+//		return data;
+//	}
 	public void saveFile(BoardDAO bDAO,CartDAO cDAO,ItemDAO iDAO,MemberDAO mDAO) {
 		String bData = bDAO.getData();
 		String cData = cDAO.getData();
 		String iData = iDAO.getData();
 		String mData = mDAO.getData();
 		
-		saveData(FileName.BOARD,bData);
-		saveData(FileName.CART,cData);
-		saveData(FileName.ITEM,iData);
-		saveData(FileName.MEMBER,mData);
+		saveDataFile(FileName.BOARD,bData);
+		saveDataFile(FileName.CART,cData);
+		saveDataFile(FileName.ITEM,iData);
+		saveDataFile(FileName.MEMBER,mData);
 		System.out.println("저장 완료");
 	}
-	private void saveData(FileName name,String data) {
-		try {
-			FileWriter fw = new FileWriter(path + name.getName());
-			fw.write(data);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+//	private void saveData(FileName name,String data) {
+//		try {
+//			FileWriter fw = new FileWriter(path + name.getName());
+//			fw.write(data);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
 	private void saveDataFile(FileName name, String data) {
 		
 		Path path = Paths.get(txtPath , name.getName());
 		
 		try(FileOutputStream fos = new FileOutputStream(path.toString());
-				OutputStreamWriter ow = new OutputStreamWriter(fos, charSet);
+			OutputStreamWriter ow = new OutputStreamWriter(fos, charSet);
 				BufferedWriter bw = new BufferedWriter(ow);){
 				bw.write(data);
 		} catch (IOException e) {
@@ -122,17 +122,16 @@ public class FileDAO {
 				InputStreamReader isr = new InputStreamReader(fis,charSet);
 				BufferedReader br = new BufferedReader(isr)
 						){
-			String line;
+			String line="a";
 			while((line = br.readLine()) != null) {
 				data.append(line);
 				data.append("\n");
 			}
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
-			e.printStackTrace();
 		}
-		
+		if(data.isEmpty())return null;
+			
 		return data.toString().substring(0,data.length()-1);
 	}
 }

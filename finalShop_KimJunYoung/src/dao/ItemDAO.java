@@ -58,6 +58,7 @@ public class ItemDAO {
 		Item.setNum(max.getItemNum());
 	}
 	void loadData(String data) {
+		if(data == null)return;
 		String[] list = data.split("\n");
 		for(String temp:list) {
 			String[]info = temp.split("/");

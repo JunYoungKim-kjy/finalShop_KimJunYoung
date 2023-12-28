@@ -26,6 +26,10 @@ public class MemberDAO {
 		
 	}
 	void loadData(String data) {
+		if(data == null) {
+			mList.add(new Member("1000","admin","admin","admin"));
+			return;
+		}
 		String[] list = data.split("\n");
 		for(String temp:list) {
 			String[]info = temp.split("/");
@@ -64,6 +68,7 @@ public class MemberDAO {
 		return data;
 	}
 	public boolean deleteMember(String id) {
+		if(id.equals("admin"))return false;
 		Member m = getMemberById(id);
 		if(m == null)return false;
 		System.out.println(m);
